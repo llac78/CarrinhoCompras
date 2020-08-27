@@ -5,6 +5,7 @@ import java.net.URI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +14,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.llac.entidades.Produto;
 import com.llac.service.ProdutoService;
 
-//@RestController
-//@RequestMapping(value = "/produtos")
 @Controller
 public class ProdutoController {
 	
@@ -22,7 +21,11 @@ public class ProdutoController {
 	private ProdutoService service;
 	
 	@GetMapping(path = "/")
-	public String index() {
+	public String index(Model model) {
+		
+		String nome = "Leo";
+		model.addAttribute("nome", nome);
+		
 		return "index";
 	}
 
