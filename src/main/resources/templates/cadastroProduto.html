@@ -1,18 +1,50 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:th="http://www.thymeleaf.org" >
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<title>My Cart</title>
 </head>
 <body>
 	<h1>MY CART</h1>
-	<form id="id_index_form" th:action="@{/}" method="get">
+	<form id="id_form_pag_index" th:action="@{/}" method="get">
 		<button type="submit" class="btn btn-primary">Voltar</button>
 	</form>
 	<h5>Cadastrar Novo Produto</h5>
+	
+	<form id="id_form_cadastroProduto" th:action="@{/inserir}" method="post">
+		<table>
+			<tbody>
+				<tr>
+					<td>
+						<label>Descrição</label>
+					</td>
+					<td>
+						<input id="id_descricao" type="text" name="descricao"   />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label>Preço(R$)</label>
+					</td>
+					<td>
+						<input type="number" required name="preco" min="0" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$" 
+						onblur="this.style.backgroundColor=/^\d+(?:\.\d{1,2})?$/.test(this.value)?'inherit':'red'" />
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td align="right">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</td>
+				</tr>
+		
+			</tbody>
+		</table>
+	</form>
+
 
 	<!-- jQuery, Poper, Boostrap -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
