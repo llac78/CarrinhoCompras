@@ -7,35 +7,34 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<title>My Cart</title>
-	
 </head>
 <body>
 	<h1>MY CART</h1>
-	<h5>Cadastrar Novo Produto</h5>
+	<h5>Cadastrar Novo Cupom</h5>
 	
-	<form id="id_form_cadastroProduto" action="#" th:action="@{/inserirProduto}" th:object="${produto}" method="post">
+	<form id="id_form_cadastroCupom" action="#" th:action="@{/inserirCupom}" th:object="${cupom}" method="post">
 		<table>
 			<tbody>
 				<tr>
 					<td>
-						<label>Descrição</label>
+						<label>Código</label>
 					</td>
 					<td>
-						<input type="text" th:field="*{descricao}" />
+						<input type="text" th:field="*{codigo}" />
 					</td>
 					<td>
-						<span th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}" style="color:red;" />
+						<span th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}" style="color:red;" />
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<label>Preço(R$)</label>
+						<label>Valor de Desconto (R$)</label>
 					</td>
 					<td>
-						<input type="number" th:field="*{preco}" min="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" />
+						<input type="number" th:field="*{valorDesconto}" min="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" />
 					</td>
 					<td>
-						<span th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}" style="color:red;" />
+						<span th:if="${#fields.hasErrors('valorDesconto')}" th:errors="*{valorDesconto}" style="color:red;" />
 					</td>
 				</tr>
 				<tr>

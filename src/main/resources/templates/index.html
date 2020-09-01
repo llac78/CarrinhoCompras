@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:th="http://www.thymeleaf.org" >
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org" >
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -9,9 +10,28 @@
 </head>
 <body>
 	<h1>MY CART</h1>
-	<form id="id_form_pag_produto" th:action="@{/cadastroProduto}" method="get">
-		<button type="submit" class="btn btn-primary">Novo Produto</button>
-	</form>
+	
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+	    <ul class="navbar-nav mr-auto">
+	      <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" th:href="@{/}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          Cadastro
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	       		<form id="id_form_pag_produto" th:action="@{/cadastroProduto}" method="get">
+	       			<a th:class="dropdown-item" th:href="@{/cadastroProduto}">Produto</a>
+	          	</form>
+		        <div class="dropdown-divider"></div>
+	          	<form id="id_form_pag_cupom" th:action="@{/cadastroCupom}" method="get">
+	       			<a th:class="dropdown-item" th:href="@{/cadastroCupom}">Cupom</a>
+	          	</form>
+	        </div>
+	      </li>
+	    </ul>
+	  </div>
+	</nav>
+	
 
 	<!-- jQuery, Popper, Bootstrap -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

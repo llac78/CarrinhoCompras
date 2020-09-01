@@ -30,13 +30,11 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		
-        <!-- https://mvnrepository.com/artifact/org.hibernate.validator/hibernate-validator -->
+        <!-- Hibernate validator -->
 		<dependency>
 		    <groupId>org.hibernate.validator</groupId>
 		    <artifactId>hibernate-validator</artifactId>
 		</dependency>
-        
-		
 		
 		<!-- Postgresql -->
 		<dependency>

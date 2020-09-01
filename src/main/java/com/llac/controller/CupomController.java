@@ -9,32 +9,32 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.llac.entidades.Produto;
-import com.llac.service.ProdutoService;
+import com.llac.entidades.Cupom;
+import com.llac.service.CupomService;
 
 @Controller
-public class ProdutoController {
+public class CupomController {
 	
 	@Autowired
-	private ProdutoService service;
+	private CupomService service;
 	
-	@GetMapping("/cadastroProduto")
-	public String cadastroProduto( Model model) {
+	@GetMapping("/cadastroCupom")
+	public String cadastroCupom( Model model) {
 		
-		model.addAttribute("produto", new Produto());
+		model.addAttribute("cupom", new Cupom());
 		
-		return "cadastroProduto";
+		return "cadastroCupom";
 	}
 
-	@PostMapping("/inserirProduto")
-	public String inserirProduto(@Valid Produto produto, BindingResult result){
+	@PostMapping("/inserirCupom")
+	public String inserirCupom(@Valid Cupom cupom, BindingResult result){
 		
 		if(result.hasFieldErrors()) {
-			return "cadastroProduto";
+			return "cadastroCupom";
 		}
 		
-		if(produto != null) {
-			service.inserir(produto);
+		if(cupom != null) {
+			service.inserir(cupom);
 		}
 		
 		return "index";
