@@ -1,5 +1,7 @@
 package com.llac.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,9 @@ public class ProdutoService {
 
 	public Produto inserir(Produto produto) {
 		return repositorio.save(produto);
+	}
+	
+	public List<Produto> listar(){
+		return repositorio.findAll();
 	}
 }
