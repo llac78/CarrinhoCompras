@@ -48,6 +48,29 @@
 		</table>
 	</form>
 
+	<br />
+	<br />
+	
+	<div th:if="${cupons.empty}">
+		<p> Não há cupons cadastrados.</p>
+	</div>
+
+	<div th:each="cupom : ${cupons}">
+		<table class="table">
+			<thead class="thead-primary">
+				<th scope="col">ID</th>
+				<th scope="col">CÓDIGO</th>
+				<th scope="col">VALOR DE DESCONTO (R$)</th>
+			</thead>
+			<tbody>
+				<tr th:each="cupom : ${cupons}">
+		            <td><span th:text="${cupom.id}"></span></td>
+		            <td><span th:text="${cupom.codigo}"></span></td>
+		            <td><span th:text="${cupom.valorDesconto}"></span></td>
+		        </tr>
+			</tbody>
+		</table>
+	</div>
 
 	<!-- jQuery, Poper, Boostrap -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

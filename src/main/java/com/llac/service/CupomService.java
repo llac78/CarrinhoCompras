@@ -1,5 +1,7 @@
 package com.llac.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,9 @@ public class CupomService {
 
 	public Cupom inserir(Cupom cupom) {
 		return repositorio.save(cupom);
+	}
+	
+	public List<Cupom> listarCupons(){
+		return repositorio.findAll();
 	}
 }

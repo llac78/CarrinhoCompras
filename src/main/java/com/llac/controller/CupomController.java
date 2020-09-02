@@ -1,5 +1,8 @@
 package com.llac.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +21,15 @@ public class CupomController {
 	@Autowired
 	private CupomService service;
 	
+	private List<Cupom> cupons = new ArrayList<>();
+	
 	@GetMapping("/cadastroCupom")
 	public String cadastroCupom( Model model) {
 		
+		cupons = listarCupons();
+		
 		model.addAttribute("cupom", new Cupom());
+		model.addAttribute("cupons", cupons);
 		
 		return "cadastroCupom";
 	}
@@ -39,5 +47,10 @@ public class CupomController {
 		
 		return "index";
 	}
+	
+	private List<Cupom> listarCupons() {
+		return service.listarCupons();
+	}
+
 
 }
