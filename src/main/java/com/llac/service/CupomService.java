@@ -18,7 +18,7 @@ public class CupomService {
 		return repositorio.save(cupom);
 	}
 	
-	public List<Cupom> listarCupons(){
+	public List<Cupom> listar(){
 		return repositorio.findAll();
 	}
 }

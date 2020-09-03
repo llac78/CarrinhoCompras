@@ -49,7 +49,7 @@ public class CupomController {
 	}
 	
 	private List<Cupom> listarCupons() {
-		return service.listarCupons();
+		return service.listar();
 	}
 
 
