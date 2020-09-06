@@ -7,18 +7,13 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 	<title>My Cart</title>
-	
-	<script>
-		$('#myModal').on('shown.bs.modal', function () {
-		  $('#myInput').trigger('focus')
-		})
-	</script>
 </head>
 <body>
 	<h1>MY CART</h1>
 	<h5>Cadastrar Novo Produto</h5>
 	
 	<form id="id_form_cadastroProduto" action="#" th:action="@{/inserirProduto}" th:object="${produto}" method="post">
+		<input id="prod_id" type="hidden" th:field="*{id}" />
 		<table>
 			<tbody>
 				<tr>
@@ -26,7 +21,7 @@
 						<label>Descrição</label>
 					</td>
 					<td>
-						<input type="text" th:field="*{descricao}" />
+						<input id="prod_descricao" type="text" th:field="*{descricao}" />
 					</td>
 					<td>
 						<span th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}" style="color:red;" />
@@ -37,7 +32,7 @@
 						<label>Preço(R$)</label>
 					</td>
 					<td>
-						<input type="number" th:field="*{preco}" min="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" />
+						<input id="prod_preco" type="number" th:field="*{preco}" min="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" />
 					</td>
 					<td>
 						<span th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}" style="color:red;" />
@@ -74,6 +69,12 @@
 	            <td><span th:text="${produto.descricao}"></span></td>
 	            <td><span th:text="${produto.preco}"></span></td>
 	            <td>
+	            	<input type="button" class="btn btn-warning btn-sm" value="Editar" 
+	            			th:data-produtoid="${produto.id}"
+							th:data-produtodescricao="${produto.descricao}"
+							th:data-produtopreco="${produto.preco}"
+							onclick="updateForm(this.getAttribute('data-produtoid'),this.getAttribute('data-produtodescricao'),this.getAttribute('data-produtopreco'),);" />
+					
 					<input type="button" class="btn btn-danger btn-sm" value="Excluir" data-toggle="modal" data-target="#modalwarning" th:attr="data-target='#modalwarning'+${produto.id}" />
 				</td>
 	        </tr>
@@ -108,6 +109,15 @@
 		</tbody>
 	</table>
 	
+	
+	
+	<script>
+		function updateForm(id, descricao, preco){
+			document.getElementById("prod_id").value = id;
+			document.getElementById("prod_descricao").value = descricao;
+			document.getElementById("prod_preco").value = preco;
+		}
+	</script>
 	
 	<!-- jQuery, Poper, Boostrap -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

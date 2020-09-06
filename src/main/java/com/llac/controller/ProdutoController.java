@@ -10,10 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import com.llac.entidades.Produto;
 import com.llac.service.ProdutoService;
@@ -39,11 +39,14 @@ public class ProdutoController {
 
 	@PostMapping("/inserirProduto")
 	public String inserirProduto(@Valid Produto produto, BindingResult result){
+		
 		if(result.hasFieldErrors()) {
 			return "cadastroProduto";
 		}
-		if(produto != null) {
+		if(produto.getId() == null) {
 			service.inserir(produto);
+		} else {
+			atualizarProduto(produto, result);
 		}
 		return "index";
 	}
@@ -58,6 +61,24 @@ public class ProdutoController {
 			service.deletar(produto);
 		}
 		
+		return "index";
+	}
+	
+	@PutMapping("/{id}/atualizarProduto")
+	public String atualizarProduto(@Valid Produto produto, BindingResult result) {
+		
+		if(result.hasFieldErrors()) {
+			return "cadastroProduto";
+		}
+		
+		Optional<Produto> opt = service.buscarPorId(produto.getId());
+		Produto p = opt.get();
+		
+		if(p != null) {
+			p.setDescricao(produto.getDescricao());
+			p.setPreco(produto.getPreco());
+			service.inserir(p);
+		}
 		return "index";
 	}
 
