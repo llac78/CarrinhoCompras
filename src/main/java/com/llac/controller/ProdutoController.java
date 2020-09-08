@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.llac.entidades.Produto;
 import com.llac.service.ProdutoService;
@@ -38,17 +39,24 @@ public class ProdutoController {
 	}
 
 	@PostMapping("/inserirProduto")
-	public String inserirProduto(@Valid Produto produto, BindingResult result){
+	public ModelAndView inserirProduto(@Valid Produto produto, BindingResult result){
+
+		ModelAndView model = new ModelAndView("cadastroProduto");
 		
 		if(result.hasFieldErrors()) {
-			return "cadastroProduto";
+			produtos = listarProdutos();
+			model.addObject("produtos", produtos);
+			
+			return model;
 		}
 		if(produto.getId() == null) {
 			service.inserir(produto);
 		} else {
 			atualizarProduto(produto, result);
 		}
-		return "index";
+		ModelAndView index = new ModelAndView("index");
+
+		return index;
 	}
 	
 	@PostMapping("/{id}/deletarProduto")
@@ -60,7 +68,6 @@ public class ProdutoController {
 		if(produto != null) {
 			service.deletar(produto);
 		}
-		
 		return "index";
 	}
 	

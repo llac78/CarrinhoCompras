@@ -5,7 +5,7 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
 	<title>My Cart</title>
 </head>
 <body>
@@ -51,12 +51,11 @@
 	
 	<br />
 	<br />
-	
-	<div th:if="${produtos.empty}">
+	<div th:if="${#lists.isEmpty(produtos)}">
 		<p> Não há produtos cadastrados.</p>
 	</div>
 
-	<table class="table" th:if="${!produtos.empty}">
+	<table class="table" th:if="${not #lists.isEmpty(produtos)}">
 		<thead class="thead-primary">
 			<th scope="col">ID</th>
 			<th scope="col">DESCRIÇÃO</th>
@@ -67,13 +66,13 @@
 			<tr>
 	            <td><span th:text="${produto.id}"></span></td>
 	            <td><span th:text="${produto.descricao}"></span></td>
-	            <td><span th:text="${produto.preco}"></span></td>
+	            <td><span th:text="${#numbers.formatDecimal(produto.preco, 1, 2, 'COMMA')}"></span></td>
 	            <td>
 	            	<input type="button" class="btn btn-warning btn-sm" value="Editar" 
 	            			th:data-produtoid="${produto.id}"
 							th:data-produtodescricao="${produto.descricao}"
 							th:data-produtopreco="${produto.preco}"
-							onclick="updateForm(this.getAttribute('data-produtoid'),this.getAttribute('data-produtodescricao'),this.getAttribute('data-produtopreco'),);" />
+							onclick="updateForm(this.getAttribute('data-produtoid'),this.getAttribute('data-produtodescricao'),this.getAttribute('data-produtopreco'));" />
 					
 					<input type="button" class="btn btn-danger btn-sm" value="Excluir" data-toggle="modal" data-target="#modalwarning" th:attr="data-target='#modalwarning'+${produto.id}" />
 				</td>
