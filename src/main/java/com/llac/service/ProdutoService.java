@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.llac.entidades.Produto;
@@ -19,8 +20,8 @@ public class ProdutoService {
 		return repositorio.save(produto);
 	}
 	
-	public List<Produto> listar(){
-		return repositorio.findAll();
+	public List<Produto> listarPorDescricao(){
+		return repositorio.findAll(Sort.by(Sort.Direction.ASC, "descricao"));
 	}
 	
 	public Optional<Produto> buscarPorId(Long id) {

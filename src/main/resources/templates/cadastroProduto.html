@@ -114,7 +114,7 @@
 		function updateForm(id, descricao, preco){
 			document.getElementById("prod_id").value = id;
 			document.getElementById("prod_descricao").value = descricao;
-			document.getElementById("prod_preco").value = preco;
+			document.getElementById("prod_preco").value = parseFloat(Math.round(preco * 100) / 100).toFixed(2);
 		}
 	</script>
 	

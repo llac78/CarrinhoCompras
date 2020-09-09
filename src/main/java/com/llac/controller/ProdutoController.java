@@ -90,7 +90,7 @@ public class ProdutoController {
 	}
 
 	public List<Produto> listarProdutos(){
-		return service.listar();
+		return service.listarPorDescricao();
 	}
 	
 }
