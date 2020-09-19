@@ -51,18 +51,18 @@
 	<br />
 	<br />
 	
-	<div th:if="${cupons.empty}">
-		<p> Não há cupons cadastrados.</p>
+	<div th:if="${#lists.isEmpty(listaCupons)}">
+		<p>Não há cupons cadastrados.</p>
 	</div>
 
-	<table class="table" th:if="${!cupons.empty}">
+	<table class="table" th:if="${!#lists.isEmpty(listaCupons)}">
 		<thead class="thead-primary">
 			<th scope="col">ID</th>
 			<th scope="col">CÓDIGO</th>
 			<th scope="col">VALOR DE DESCONTO (R$)</th>
 		</thead>
 		<tbody>
-			<tr th:each="cupom : ${cupons}">
+			<tr th:each="cupom : ${listaCupons}">
 	            <td><span th:text="${cupom.id}"></span></td>
 	            <td><span th:text="${cupom.codigo}"></span></td>
 	            <td><span th:text="${cupom.valorDesconto}"></span></td>

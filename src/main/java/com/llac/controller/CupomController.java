@@ -21,15 +21,15 @@ public class CupomController {
 	@Autowired
 	private CupomService service;
 	
-	private List<Cupom> cupons = new ArrayList<>();
+	private List<Cupom> listaCupons = new ArrayList<>();
 	
 	@GetMapping("/cadastroCupom")
 	public String cadastroCupom( Model model) {
 		
-		cupons = listarCupons();
+		listaCupons = listarCupons();
 		
 		model.addAttribute("cupom", new Cupom());
-		model.addAttribute("cupons", cupons);
+		model.addAttribute("listaCupons", listaCupons);
 		
 		return "cadastroCupom";
 	}

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,10 @@ public class ProdutoService {
 		return repositorio.findAll(Sort.by(Sort.Direction.ASC, "descricao"));
 	}
 	
+	public Object listar(PageRequest of) {
+		return repositorio.findAll(of);
+	}
+
 	public Optional<Produto> buscarPorId(Long id) {
 		return repositorio.findById(id);
 	}
@@ -31,5 +36,6 @@ public class ProdutoService {
 	public void deletar(Produto p) {
 		repositorio.delete(p);
 	}
+
 	
 }
