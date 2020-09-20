@@ -37,14 +37,10 @@
 							<td th:text="${produto.id}"></td>
 							<td th:text="${produto.descricao}"></td>
 							<td th:text="${produto.preco}"></td>
-
 							<td>
-								<form id="id_form_pag_produto" th:action="@{/{id}/cadastroProduto(id=${produto.id})}" method="post">
-									<input type="hidden" id="prod_hidden_id" value="${produto.id}" />
-									<input type="hidden" id="prod_hidden_descricao" value="${produto.descricao}" />
-									<input type="hidden" id="prod_hidden_preco" value="${produto.preco}" />
-									<input type="submit" class="btn btn-warning btn-sm" value="Editar" th:href="@{/cadastroProduto}" />
-					          	</form>
+                               	<form id="id_form_editarProduto" th:action="@{/cadastroProduto/{id}(id=${produto.id})}" method="post">
+									<input type="submit" value="Editar" class="btn btn-warning btn-sm" />
+								</form>
 							</td>
 							<td>
 								<input type="button" class="btn btn-danger btn-sm" value="Excluir" data-toggle="modal" data-target="#modaldeletar"
@@ -91,8 +87,6 @@
 		</div>
 
 
-
-
 		<!-- listaProdutos pagination -->
 		<div class="row">
 			<div class="col">
@@ -126,8 +120,6 @@
 			</div>
 		</div>
 	</div>
-
-
 	
 
 	<!-- jQuery, Poper, Boostrap -->

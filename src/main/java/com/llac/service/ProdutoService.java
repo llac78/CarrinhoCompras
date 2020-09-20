@@ -13,18 +13,18 @@ import com.llac.repositorio.ProdutoRepositorio;
 
 @Service
 public class ProdutoService {
-	
+
 	@Autowired
 	private ProdutoRepositorio repositorio;
 
 	public Produto inserir(Produto produto) {
 		return repositorio.save(produto);
 	}
-	
-	public List<Produto> listarPorDescricao(){
+
+	public List<Produto> listarPorDescricao() {
 		return repositorio.findAll(Sort.by(Sort.Direction.ASC, "descricao"));
 	}
-	
+
 	public Object listar(PageRequest of) {
 		return repositorio.findAll(of);
 	}
@@ -32,10 +32,33 @@ public class ProdutoService {
 	public Optional<Produto> buscarPorId(Long id) {
 		return repositorio.findById(id);
 	}
-	
-	public void deletar(Produto p) {
-		repositorio.delete(p);
+
+	public void deletar(Produto produto) {
+		repositorio.delete(produto);
 	}
 
-	
+	public Produto criarOuAtualizarProduto(Produto p) {
+		if (p.getId() == null) {
+			p = repositorio.save(p);
+
+			return p;
+			
+		} else {
+			Optional<Produto> produto = repositorio.findById(p.getId());
+
+			if (produto.isPresent()) {
+				Produto novoProduto = produto.get();
+				novoProduto.setDescricao(p.getDescricao());
+				novoProduto.setPreco(p.getPreco());
+
+				novoProduto = repositorio.save(novoProduto);
+
+				return novoProduto;
+			} else {
+				p = repositorio.save(p);
+
+				return p;
+			}
+		}
+	}
 }

@@ -12,7 +12,7 @@
 	<h1>MY CART</h1>
 	<h5>Cadastrar Novo Produto</h5>
 	
-	<form id="id_form_cadastroProduto" action="#" th:action="@{/inserirProduto}" th:object="${produto}" method="post">
+	<form id="id_form_cadastroProduto" action="#" th:action="@{/criarProduto}" th:object="${produto}" method="post">
 		<input id="prod_id" type="hidden" th:field="*{id}" />
 		<table>
 			<tbody>
@@ -21,7 +21,7 @@
 						<label>Descrição</label>
 					</td>
 					<td>
-						<input id="prod_descricao" type="text" th:field="*{descricao}" value="${p.descricao}"  />
+						<input id="prod_descricao" type="text" th:field="*{descricao}" />
 					</td>
 					<td>
 						<span th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}" style="color:red;" />
