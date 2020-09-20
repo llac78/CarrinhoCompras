@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -76,7 +77,7 @@ public class ProdutoController {
 		pageModel.setSIZE(8);
 		pageModel.initPageAndSize();
 		model.addAttribute("produto", new Produto());
-		model.addAttribute("listaProdutos", service.listar(PageRequest.of(pageModel.getPAGE(), pageModel.getSIZE())));
+		model.addAttribute("listaProdutos", service.listar(PageRequest.of(pageModel.getPAGE(), pageModel.getSIZE(), Sort.by("descricao"))));
 
 		return "listaProdutos";
 	}

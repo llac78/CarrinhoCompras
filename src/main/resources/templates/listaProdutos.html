@@ -24,7 +24,7 @@
 			<div class="col">
 				<table class="table table-bordered" th:object="${produto}" th:if="${produto != null}">
 					<thead>
-						<tr>
+						<tr align="center">
 							<th>ID</th>
 							<th>Descrição</th>
 							<th>Preço (R$)</th>
@@ -34,15 +34,15 @@
 					</thead>
 					<tbody th:each="produto : ${listaProdutos}" th:onclick="'javascript:abrirModal(\''+${produto.id}+'\');'">
 						<tr>
-							<td th:text="${produto.id}"></td>
+							<td align="center" th:text="${produto.id}"></td>
 							<td th:text="${produto.descricao}"></td>
-							<td th:text="${produto.preco}"></td>
-							<td>
+							<td align="center"><span th:text="${#numbers.formatDecimal(produto.preco, 1, 2, 'COMMA')}"></span></td>
+							<td align="center">
                                	<form id="id_form_editarProduto" th:action="@{/cadastroProduto/{id}(id=${produto.id})}" method="post">
 									<input type="submit" value="Editar" class="btn btn-warning btn-sm" />
 								</form>
 							</td>
-							<td>
+							<td align="center">
 								<input type="button" class="btn btn-danger btn-sm" value="Excluir" data-toggle="modal" data-target="#modaldeletar"
 								th:attr="data-target='#modaldeletar'+${produto.id}" />
 							</td>
