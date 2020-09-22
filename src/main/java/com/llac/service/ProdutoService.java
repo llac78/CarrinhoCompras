@@ -1,11 +1,10 @@
 package com.llac.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.llac.entidades.Produto;
@@ -20,13 +19,12 @@ public class ProdutoService {
 	public Produto inserir(Produto produto) {
 		return repositorio.save(produto);
 	}
-
-	public List<Produto> listarPorDescricao() {
-		return repositorio.findAll(Sort.by(Sort.Direction.ASC, "descricao"));
-	}
-
-	public Object listar(PageRequest of) {
-		return repositorio.findAll(of);
+	
+	public Page<Produto> listar(Pageable pageable, String keyword) {
+	   if (keyword != null) {
+	       return repositorio.buscarPorKeyword(keyword, pageable);
+	   }
+	   return repositorio.findAll(pageable);
 	}
 
 	public Optional<Produto> buscarPorId(Long id) {
@@ -61,4 +59,5 @@ public class ProdutoService {
 			}
 		}
 	}
+	
 }

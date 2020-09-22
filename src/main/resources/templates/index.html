@@ -5,11 +5,11 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"></link>
 	<title>My Cart</title>
 </head>
 <body>
-	<h1>MY CART</h1>
+	<h1 align="center">MY CART</h1>
 	
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -34,7 +34,7 @@
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 	       		<form id="id_form_lista_produto" action="#" th:action="@{/listaProdutos}" method="get">
-	       			<a th:class="dropdown-item" th:href="@{/listaProdutos}">Produtos</a>
+	       			<a th:class="dropdown-item" th:href="@{/listaProdutos/1}">Produtos</a>
 	          	</form>
 	        </div>
 	      </li>
