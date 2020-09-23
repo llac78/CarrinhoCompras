@@ -76,19 +76,21 @@ public class ProdutoController {
 	}
 
     @GetMapping("/listaProdutos/{page}")
-    public ModelAndView listArticlesPageByPage(@PathVariable("page") int page, @Param("keyword") String keyword) {
+    public ModelAndView listarProdutosPaginacao(@PathVariable("page") int page, @Param("keyword") String keyword) {
 	   
         ModelAndView modelAndView = new ModelAndView("listaProdutos");
         Pageable pageable = PageRequest.of(page - 1, 8, Sort.by("descricao"));
         
         Page<Produto> produtoPage = service.listar(pageable, keyword);
+        List<Produto> produtoLista = produtoPage.getContent();
+        
         int totalPages = produtoPage.getTotalPages();
         if(totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1,totalPages).boxed().collect(Collectors.toList());
             modelAndView.addObject("pageNumbers", pageNumbers);
         }
         modelAndView.addObject("keyword", keyword);
-        modelAndView.addObject("produtoLista", produtoPage.getContent());
+        modelAndView.addObject("produtoLista", produtoLista);
         
         return modelAndView;
     }

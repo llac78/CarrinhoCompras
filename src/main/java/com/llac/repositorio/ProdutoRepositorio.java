@@ -9,7 +9,7 @@ import com.llac.entidades.Produto;
 
 public interface ProdutoRepositorio extends JpaRepository<Produto, Long> {
 	
-	@Query(value = "SELECT * FROM tb_produto WHERE descricao LIKE %?1% ORDER BY descricao", nativeQuery = true)
+	@Query(value = "SELECT * FROM tb_produto WHERE LOWER(descricao) LIKE LOWER(concat('%', ?1, '%')) ORDER BY descricao", nativeQuery = true)
 	public Page<Produto> buscarPorKeyword(String keyword, Pageable pageable);
 	
 }
