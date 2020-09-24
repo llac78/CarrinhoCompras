@@ -12,18 +12,18 @@
 <body>
 	<div align="center">
 		<h1>MY CART</h1>
-		<h5>Relatório de Produtos</h5>
+		<h5>Relatório de Cupons</h5>
 		
 		<br />
 		
-		<div th:if="${#lists.isEmpty(listaProdutos)}">
-			<p>Não há produtos cadastrados.</p>
+		<div th:if="${#lists.isEmpty(listaCupons)}">
+			<p>Não há cupons cadastrados.</p>
 		</div>
 	</div>
 	
-	<div align="center" th:if="${listaProdutos != null && !listaProdutos.isEmpty()}">
-		<form th:action="@{/listaProdutos/1}">
-		    Produto: 
+	<div align="center" th:if="${listaCupons != null && !listaCupons.isEmpty()}">
+		<form th:action="@{/listaCupons/1}">
+		    Cupom: 
 		    &nbsp;
 		    <input type="text" name="keyword" id="keyword" placeholder="Digite um código" size="50" th:value="${keyword}" required />
 		    &nbsp;
@@ -34,37 +34,37 @@
 	</div>
 	
 	 <br /><br />
-	
-	<div class="row" th:fragment="produto-list" th:if="${listaProdutos != null && !listaProdutos.isEmpty()}">
+	 
+	<div class="row" th:fragment="cupom-list" th:if="${listaCupons != null && !listaCupons.isEmpty()}">
         <div class="col-md-2"></div>
         <div class="col-md-8">
             <table id="link-list" class="table table-striped table-bordered" style="width:100%">
                 <thead align="center">
 	                <tr>
 	                    <th>ID</th>
-	                    <th>DESCRIÇÃO</th>
-	                    <th>PREÇO (R$)</th>
+	                    <th>CÓDIGO</th>
+	                    <th>VALOR DE DESCONTO (R$)</th>
 	                    <th>*</th>
 	                    <th>*</th>
 	                </tr>
                 </thead>
-                <tbody th:each="produto : ${listaProdutos}" th:onclick="'javascript:abrirModal(\''+${produto.id}+'\');'">
+                <tbody align="center" th:each="cupom : ${listaCupons}" th:onclick="'javascript:abrirModal(\''+${cupom.id}+'\');'">
 					<tr>
-						<td align="center" th:text="${produto.id}"></td>
-						<td th:text="${produto.descricao}"></td>
-						<td align="center"><span th:text="${#numbers.formatDecimal(produto.preco, 1, 2, 'COMMA')}"></span></td>
-						<td align="center">
-                           	<form id="id_form_editarProduto" th:action="@{/cadastroProduto/{id}(id=${produto.id})}" method="post">
+						<td th:text="${cupom.id}"></td>
+						<td th:text="${cupom.codigo}"></td>
+						<td><span th:text="${#numbers.formatDecimal(cupom.valorDesconto, 1, 2, 'COMMA')}"></span></td>
+						<td>
+                           	<form id="id_form_editarCupom" th:action="@{/cadastroCupom/{id}(id=${cupom.id})}" method="post">
 								<input type="submit" value="Editar" class="btn btn-warning btn-sm" />
 							</form>
 						</td>
-						<td align="center">
+						<td>
 							<input type="button" class="btn btn-danger btn-sm" value="Excluir" data-toggle="modal" data-target="#modaldeletar"
-							th:attr="data-target='#modaldeletar'+${produto.id}" />
+							th:attr="data-target='#modaldeletar'+${cupom.id}" />
 						</td>
 							
 						<!-- MODAL DELETAR -->
-						<div id="modaldeletar" class="modal" tabindex="-1" role="dialog" th:id="modaldeletar+${produto.id}">
+						<div id="modaldeletar" class="modal" tabindex="-1" role="dialog" th:id="modaldeletar+${cupom.id}">
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -82,10 +82,10 @@
 									</div>
 									<div class="modal-body">
 										<p>Deseja excluir este registro?</p>
-										<p th:text="${produto.descricao}"></p>
+										<p th:text="${cupom.codigo}"></p>
 									</div>
 									<div class="modal-footer">
-										<form id="id_form_deletarProduto" th:action="@{/{id}/deletarProduto(id=${produto.id})}" method="post">
+										<form id="id_form_deletarCupom" th:action="@{/{id}/deletarCupom(id=${cupom.id})}" method="post">
 											<input type="submit" value="Sim" class="btn btn-primary btn-sm" />
 										</form>
 										<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
@@ -108,7 +108,7 @@
             <nav aria-label="Pagination">
                 <ul class="pagination justify-content-center">
                     <li class="page-item" th:each="pageNumber : ${pageNumbers}" >
-                        <a class="page-link" th:href="@{|/listaProdutos/${pageNumber}|}" th:text=${pageNumber}>1</a>
+                        <a class="page-link" th:href="@{|/listaCupons/${pageNumber}|}" th:text=${pageNumber}>1</a>
                     </li>
                 </ul>
             </nav>
@@ -117,7 +117,7 @@
     </div>
 	<!-- FIM PAGINAÇÃO -->
 	
-
+	
 	<!-- jQuery, Poper, Boostrap -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -126,7 +126,7 @@
 	<!-- SCRIPTS JS -->
 	<script type="text/javascript"> 
     	function limparPesquisa() {
-	        window.location = "[[@{/listaProdutos/1}]]";
+	        window.location = "[[@{/listaCupons/1}]]";
 	    }
 	</script> 
 </body>

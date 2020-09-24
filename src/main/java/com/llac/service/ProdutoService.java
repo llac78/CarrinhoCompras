@@ -22,11 +22,11 @@ public class ProdutoService {
 	
 	public Page<Produto> listar(Pageable pageable, String keyword) {
 	   if (keyword != null) {
-	       return repositorio.buscarPorKeyword(keyword, pageable);
+	       return repositorio.listarPorKeyword(keyword, pageable);
 	   }
 	   return repositorio.findAll(pageable);
 	}
-
+	
 	public Optional<Produto> buscarPorId(Long id) {
 		return repositorio.findById(id);
 	}

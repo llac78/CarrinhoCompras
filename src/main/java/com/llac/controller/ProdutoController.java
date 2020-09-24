@@ -1,5 +1,6 @@
 package com.llac.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -82,7 +83,9 @@ public class ProdutoController {
         Pageable pageable = PageRequest.of(page - 1, 8, Sort.by("descricao"));
         
         Page<Produto> produtoPage = service.listar(pageable, keyword);
-        List<Produto> produtoLista = produtoPage.getContent();
+        List<Produto> listaProdutos = new ArrayList<>();
+        
+        listaProdutos = produtoPage.getContent();
         
         int totalPages = produtoPage.getTotalPages();
         if(totalPages > 0) {
@@ -90,7 +93,7 @@ public class ProdutoController {
             modelAndView.addObject("pageNumbers", pageNumbers);
         }
         modelAndView.addObject("keyword", keyword);
-        modelAndView.addObject("produtoLista", produtoLista);
+        modelAndView.addObject("listaProdutos", listaProdutos);
         
         return modelAndView;
     }

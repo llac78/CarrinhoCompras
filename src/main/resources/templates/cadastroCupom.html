@@ -9,66 +9,59 @@
 	<title>My Cart</title>
 </head>
 <body>
-	<h1>MY CART</h1>
-	<h5>Cadastrar Novo Cupom</h5>
+	<h1 align="center">MY CART</h1>
+	<h5 align="center">Cadastrar Novo Cupom</h5>
 	
-	<form id="id_form_cadastroCupom" action="#" th:action="@{/inserirCupom}" th:object="${cupom}" method="post">
-		<table>
-			<tbody>
-				<tr>
-					<td>
-						<label>Código</label>
-					</td>
-					<td>
-						<input type="text" th:field="*{codigo}" />
-					</td>
-					<td>
-						<span th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}" style="color:red;" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<label>Valor de Desconto (R$)</label>
-					</td>
-					<td>
-						<input type="number" th:field="*{valorDesconto}" min="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" />
-					</td>
-					<td>
-						<span th:if="${#fields.hasErrors('valorDesconto')}" th:errors="*{valorDesconto}" style="color:red;" />
-					</td>
-				</tr>
-				<tr>
-					<td></td>
-					<td align="right">
-						<button type="submit" class="btn btn-primary">Salvar</button>
-					</td>
-				</tr>
-		
-			</tbody>
-		</table>
-	</form>
-
-	<br />
 	<br />
 	
-	<div th:if="${#lists.isEmpty(listaCupons)}">
-		<p>Não há cupons cadastrados.</p>
+	<div align="center">
+		<form id="id_form_cadastroCupom" action="#" th:action="@{/criarCupom}" th:object="${cupom}" method="post">
+			<input id="cupom_id" type="hidden" th:field="*{id}" />
+			<table>
+				<tbody>
+					<tr>
+						<td align="right">
+							<label>Código</label>
+						</td>
+						<td>
+							<input id="cupom_codigo" type="text" th:field="*{codigo}" />
+						</td>
+						<td>
+							<span th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}" style="color:red;" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>Valor de desconto(R$)</label>
+						</td>
+						<td>
+							<input id="cupom_valorDesconto" type="number" th:field="*{valorDesconto}" min="0" step="0.01" pattern="^\d+(?:\.\d{1,2})?$" placeholder="0,00" />
+						</td>
+						<td>
+							<span th:if="${#fields.hasErrors('valorDesconto')}" th:errors="*{valorDesconto}" style="color:red;" />
+						</td>
+					</tr>
+					<tr><td><br /></td></tr>
+					<tr>
+						<td></td>
+						<td align="right">
+							<button type="submit" class="btn btn-success btn-sm">Salvar</button>
+							<input type="button" value="Cancelar" id="btnCancelar" class="btn btn-secondary btn-sm" onclick="paginaPrincipal();" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
 	</div>
+	
+	
+	<!-- SCRIPTS JS -->
+	<script type="text/javascript"> 
+    	function paginaPrincipal() {
+	        window.location = "[[@{/}]]";
+	    }
+	</script> 
 
-	<table class="table" th:if="${!#lists.isEmpty(listaCupons)}">
-		<thead class="thead-primary">
-			<th scope="col">ID</th>
-			<th scope="col">CÓDIGO</th>
-			<th scope="col">VALOR DE DESCONTO (R$)</th>
-		</thead>
-		<tbody>
-			<tr th:each="cupom : ${listaCupons}">
-	            <td><span th:text="${cupom.id}"></span></td>
-	            <td><span th:text="${cupom.codigo}"></span></td>
-	            <td><span th:text="${cupom.valorDesconto}"></span></td>
-	        </tr>
-		</tbody>
-	</table>
 
 	<!-- jQuery, Poper, Boostrap -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
