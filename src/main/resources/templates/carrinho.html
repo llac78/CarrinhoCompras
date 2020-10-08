@@ -23,10 +23,10 @@
 	       			<a th:class="dropdown-item" th:href="@{/cadastroProduto}">Produto</a>
 	          	</form>
 		        <div class="dropdown-divider"></div>
-	          	<form id="id_form_pag_cupom" th:action="@{/cadastroCupom}" method="get">
-	       			<a th:class="dropdown-item" th:href="@{/cadastroCupom}">Cupom</a>
-	          	</form>
-	        </div>
+		          	<form id="id_form_pag_cupom" th:action="@{/cadastroCupom}" method="get">
+		       			<a th:class="dropdown-item" th:href="@{/cadastroCupom}">Cupom</a>
+		          	</form>
+		        </div>
 	      </li>
 	      <li class="nav-item dropdown">
 	        <a class="nav-link dropdown-toggle" th:href="@{/}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -37,19 +37,37 @@
 	       			<a th:class="dropdown-item" th:href="@{/listaProdutos/1}">Produtos</a>
 	          	</form>
 	         	<div class="dropdown-divider"></div>
-	          	<form id="id_form_lista_cupom" action="#" th:action="@{/listaCupons}" method="get">
-	       			<a th:class="dropdown-item" th:href="@{/listaCupons/1}">Cupons</a>
-	          	</form>
-	        	<div class="dropdown-divider"></div>
-	          	<form id="id_form_lista_pedido" action="#" th:action="@{/listaPedidos}" method="get">
-	       			<a th:class="dropdown-item" th:href="@{/listaPedidos}">Pedidos</a>
-	          	</form>
-        	</div>
+		          	<form id="id_form_lista_cupom" action="#" th:action="@{/listaCupons}" method="get">
+		       			<a th:class="dropdown-item" th:href="@{/listaCupons/1}">Cupons</a>
+		          	</form>
+	        	</div>
 	      </li>
 	    </ul>
 	  </div>
 	</nav>
 	
+<!-- 	<div class="row" th:fragment="produtoc-list" th:if="${listaProdutos != null && !listaProdutos.isEmpty()}"> -->
+        <div class="col-md-8">
+            <table id="link-list" class="table table-striped table-bordered" style="width:100%">
+                <thead align="center">
+	                <tr>
+	                    <th>DESCRIÇÃO</th>
+	                    <th>PREÇO (R$)</th>
+	                    <th>QUANTIDADE</th>
+	                    <th>TOTAL (R$)</th>
+	                </tr>
+                </thead>
+                <tbody>
+					<tr>
+						<td>Exemplo</td>
+						<td align="center">50,00</td>
+						<td align="center">5</td>
+						<td align="center">250,00</td>	
+					</tr>
+                </tbody>
+            </table>
+        </div>
+<!--     </div> -->
 	
 
 	<!-- jQuery, Popper, Bootstrap -->

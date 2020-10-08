@@ -4,44 +4,37 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 @Entity
-@Table(name = "tb_produto")
-public class Produto implements Serializable {
+@Table(name = "tb_pedido")
+public class Pedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@NotEmpty(message = "Campo obrigatório")
-	private String descricao;
-	
-	@NotNull(message = "Campo obrigatório")
-	private Double preco;
-	
-	@OneToMany(mappedBy = "id.produto")
+
+	@ManyToOne
+	private Cupom cupom;
+
+	@OneToMany(mappedBy = "id.pedido", cascade = CascadeType.ALL)
 	private Set<ItemPedido> itens = new HashSet<>();
-	
-	public Produto() {
+
+	public Pedido() {
 	}
 
-	public Produto(Long id, String descricao, Double preco) {
+	public Pedido(Long id, Cupom cupom) {
 		this.id = id;
-		this.descricao = descricao;
-		this.preco = preco;
+		this.cupom = cupom;
 	}
 
 	public Long getId() {
@@ -52,30 +45,16 @@ public class Produto implements Serializable {
 		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public Cupom getCupom() {
+		return cupom;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setCupom(Cupom cupom) {
+		this.cupom = cupom;
 	}
 
-	public Double getPreco() {
-		return preco;
-	}
-
-	public void setPreco(Double preco) {
-		this.preco = preco;
-	}
-	
-	@JsonIgnore
-	public Set<Pedido> getPedidos(){
-		Set<Pedido> set = new HashSet<>();
-		for(ItemPedido it : itens) {
-			set.add(it.getPedido());
-		}
-		
-		return set;
+	public Set<ItemPedido> getItens() {
+		return itens;
 	}
 
 	@Override
@@ -94,7 +73,7 @@ public class Produto implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Produto other = (Produto) obj;
+		Pedido other = (Pedido) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -102,6 +81,14 @@ public class Produto implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
+	public Double getTotal() {
+		double soma = 0.0;
+		for (ItemPedido item : itens) {
+			soma += item.getSubTotal();
+		}
+
+		return soma;
+	}
+
 }
