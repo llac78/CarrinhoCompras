@@ -1,5 +1,6 @@
 package com.llac.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,10 @@ public class ProdutoService {
 
 	public Produto inserir(Produto produto) {
 		return repositorio.save(produto);
+	}
+	
+	public List<Produto> listarTodos() {
+	   return repositorio.findAll();
 	}
 	
 	public Page<Produto> listar(Pageable pageable, String keyword) {

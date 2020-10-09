@@ -23,9 +23,9 @@
 	       			<a th:class="dropdown-item" th:href="@{/cadastroProduto}">Produto</a>
 	          	</form>
 		        <div class="dropdown-divider"></div>
-	          	<form id="id_form_pag_cupom" th:action="@{/cadastroCupom}" method="get">
-	       			<a th:class="dropdown-item" th:href="@{/cadastroCupom}">Cupom</a>
-	          	</form>
+		          	<form id="id_form_pag_cupom" th:action="@{/cadastroCupom}" method="get">
+		       			<a th:class="dropdown-item" th:href="@{/cadastroCupom}">Cupom</a>
+		          	</form>
 	        </div>
 	      </li>
 	      <li class="nav-item dropdown">
@@ -50,11 +50,54 @@
 	  </div>
 	</nav>
 	
+	<div align="center" th:if="${listaProdutos != null && !listaProdutos.isEmpty()}">
+		<form th:action="@{/1}">
+		    Produto: 
+		    &nbsp;
+		    <input type="text" name="keyword" id="keyword" placeholder="Digite um produto" size="50" th:value="${keyword}" required />
+		    &nbsp;
+		    <input type="submit" value="Pesquisar" class="btn btn-primary btn-sm" />
+		    &nbsp;
+		    <input type="button" value="Limpar" id="btnClear" class="btn btn-secondary btn-sm" onclick="limparPesquisa();" />
+		</form>
+	</div>
 	
+ 	<br /><br />
+	
+	<div class="row" th:fragment="produto-list" th:if="${listaProdutos != null && !listaProdutos.isEmpty()}">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <table id="link-list" class="table table-striped table-bordered" style="width:100%">
+                <thead align="center">
+	                <tr>
+	                    <th>ID</th>
+	                    <th>DESCRIÇÃO</th>
+	                    <th>PREÇO (R$)</th>
+	                </tr>
+                </thead>
+                <tbody th:each="produto : ${listaProdutos}" th:onclick="'javascript:abrirModal(\''+${produto.id}+'\');'">
+					<tr>
+						<td align="center" th:text="${produto.id}"></td>
+						<td th:text="${produto.descricao}"></td>
+						<td align="center"><span th:text="${#numbers.formatDecimal(produto.preco, 1, 2, 'COMMA')}"></span></td>
+					</tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    
 
 	<!-- jQuery, Popper, Bootstrap -->
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+	<!-- SCRIPTS JS -->
+	<script type="text/javascript"> 
+    	function limparPesquisa() {
+	        window.location = "[[@{/1}]]";
+	    }
+	</script> 
 </body>
 </html>
