@@ -97,5 +97,18 @@ public class ProdutoController {
         
         return modelAndView;
     }
+    
+	@PostMapping("/carrinho/{id}")
+	public ModelAndView addCarrinho(@PathVariable("id") Long id) {
+
+		ModelAndView mv = new ModelAndView("carrinho");
+		Optional<Produto> p = service.buscarPorId(id);
+		Produto produto = p.get();
+
+		if (produto != null) {
+			mv.addObject("produto", produto);
+		}
+		return mv;
+	}
 
 }

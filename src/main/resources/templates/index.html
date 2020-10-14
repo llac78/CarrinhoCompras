@@ -72,7 +72,9 @@
 		        		<li align="center">
 		        			<label th:text="${produto.descricao}"></label><br />
 							<h5> <span th:text="${#numbers.formatDecimal(produto.preco, 1, 2, 'COMMA')}"></span> </h5>
-							<input type="button" value="COMPRAR" class="btn btn-success btn-sm" />
+                           	<form id="id_form_addcarrinho" th:action="@{/carrinho/{id}(id=${produto.id})}" method="post">
+								<input type="submit" value="COMPRAR" class="btn btn-success btn-sm" />
+							</form>
 		        		</li>
 		        	</ul>
 	        	</div>

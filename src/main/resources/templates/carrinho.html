@@ -46,28 +46,65 @@
 	  </div>
 	</nav>
 	
-<!-- 	<div class="row" th:fragment="produtoc-list" th:if="${listaProdutos != null && !listaProdutos.isEmpty()}"> -->
+	<div class="row" th:fragment="produto-cart" th:if="${produto != null}">
+	 	<div class="col-md-2"></div>
         <div class="col-md-8">
             <table id="link-list" class="table table-striped table-bordered" style="width:100%">
                 <thead align="center">
 	                <tr>
-	                    <th>DESCRIÇÃO</th>
-	                    <th>PREÇO (R$)</th>
+	                    <th>PRODUTO</th>
+	                    <th>UNIDADE</th>
 	                    <th>QUANTIDADE</th>
-	                    <th>TOTAL (R$)</th>
+	                    <th>TOTAL</th>
 	                </tr>
                 </thead>
                 <tbody>
 					<tr>
-						<td>Exemplo</td>
-						<td align="center">50,00</td>
-						<td align="center">5</td>
-						<td align="center">250,00</td>	
+						<td>
+		        			<label th:text="${produto.descricao}"></label>
+						</td>
+						<td>
+							R$  <label th:text="${#numbers.formatDecimal(produto.preco, 1, 2, 'COMMA')}"> </label>
+						</td>
+						<td>
+                           	5
+						</td>
+						<td>R$ &nbsp; 2000,00</td>
 					</tr>
                 </tbody>
             </table>
+
+        	<table id="link-list" class="table table-striped table-bordered" style="width:100%">
+                <thead align="center">
+	                <tr>
+	                    <th>RESUMO</th>
+	                </tr>
+                </thead>
+                <tbody>
+					<tr>
+						<td>
+		        			<label th:text="SUBTOTAL"></label>
+						</td>
+						<td>
+							R$  <label th:text="${#numbers.formatDecimal(produto.preco, 1, 2, 'COMMA')}"> </label>
+						</td>
+					</tr>
+					<tr>
+						<td>
+                           	TOTAL
+						</td>
+						<td><h3>R$ &nbsp; 2000,00</h3></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<input class="btn btn-success btn-sm" type="button" value="Fazer pedido" />
+						</td>
+					</tr>
+                </tbody>
+        	</table>	
         </div>
-<!--     </div> -->
+    </div>
 	
 
 	<!-- jQuery, Popper, Bootstrap -->
