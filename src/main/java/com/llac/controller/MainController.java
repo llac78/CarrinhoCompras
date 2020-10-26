@@ -29,12 +29,20 @@ public class MainController {
 
 		ModelAndView mv = new ModelAndView("index");
 		listaProdutos = service.listarTodos();
-		
+
 		mv.addObject("listaProdutos", listaProdutos);
 
 		return mv;
 	}
 	
+	@GetMapping("/login")
+	public ModelAndView abrirLogin() {
+
+		ModelAndView mv = new ModelAndView("login");
+
+		return mv;
+	}
+
 	@GetMapping("/{page}")
 	public ModelAndView listarProdutosPaginacao(@PathVariable("page") int page, @Param("keyword") String keyword) {
 
@@ -51,5 +59,6 @@ public class MainController {
 
 		return modelAndView;
 	}
+
 
 }

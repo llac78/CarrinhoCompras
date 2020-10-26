@@ -46,7 +46,7 @@
 	  </div>
 	</nav>
 	
-	<div class="row" th:fragment="produto-cart" th:if="${produto != null}">
+	<div class="row" th:fragment="produto-cart" th:if="${produtosCarrinho != null && !produtosCarrinho.isEmpty()}">
 	 	<div class="col-md-2"></div>
         <div class="col-md-8">
             <table id="link-list" class="table table-striped table-bordered" style="width:100%">
@@ -58,14 +58,12 @@
 	                    <th>TOTAL</th>
 	                </tr>
                 </thead>
-                <tbody>
+                <tbody th:each="produto : ${produtosCarrinho}">
 					<tr>
 						<td>
 		        			<label th:text="${produto.descricao}"></label>
 						</td>
-						<td>
-							R$  <label th:text="${#numbers.formatDecimal(produto.preco, 1, 2, 'COMMA')}"> </label>
-						</td>
+						<td align="center"><span th:text="${#numbers.formatDecimal(produto.preco, 1, 2, 'COMMA')}"></span></td>
 						<td>
                            	5
 						</td>
@@ -86,7 +84,7 @@
 		        			<label th:text="SUBTOTAL"></label>
 						</td>
 						<td>
-							R$  <label th:text="${#numbers.formatDecimal(produto.preco, 1, 2, 'COMMA')}"> </label>
+<!-- 							R$  <label th:text="${#numbers.formatDecimal(produto.preco, 1, 2, 'COMMA')}"> </label> -->
 						</td>
 					</tr>
 					<tr>
