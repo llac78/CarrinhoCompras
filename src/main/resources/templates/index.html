@@ -9,11 +9,27 @@
 	<title>My Cart</title>
 </head>
 <body>
-	<div style="background-color: lightblue;">
-		<form align="right" th:action="@{/login}">
-		    <input type="submit" value="Login" class="btn btn-primary btn-sm" />
-		</form>
-	</div>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	  <div class="collapse navbar-collapse" id="navbarLogin">
+	    <ul class="navbar-nav mr-auto">
+	      <li class="nav-item dropdown">
+	        <a class="nav-link dropdown-toggle" th:href="@{/}" id="navbarDropdownLogin" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          Login
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+       		<form id="id_form_pag_login" action="#" th:action="@{/login}" method="get">
+       			<a th:class="dropdown-item" th:href="@{/login}">Entrar</a>
+          	</form>
+	        <div class="dropdown-divider"></div>
+          	<form id="id_form_pag_cadastro_usuario" th:action="@{/cadastroUsuario}" method="get">
+       			<a th:class="dropdown-item" th:href="@{/cadastroUsuario}">Cadastrar</a>
+          	</form>
+	        </div>
+	      </li>
+	      
+	    </ul>
+	  </div>
+	</nav>
 	
 	<h1 align="center">MY CART</h1>
 	
@@ -29,9 +45,9 @@
 	       			<a th:class="dropdown-item" th:href="@{/cadastroProduto}">Produto</a>
 	          	</form>
 		        <div class="dropdown-divider"></div>
-		          	<form id="id_form_pag_cupom" th:action="@{/cadastroCupom}" method="get">
-		       			<a th:class="dropdown-item" th:href="@{/cadastroCupom}">Cupom</a>
-		          	</form>
+	          	<form id="id_form_pag_cupom" th:action="@{/cadastroCupom}" method="get">
+	       			<a th:class="dropdown-item" th:href="@{/cadastroCupom}">Cupom</a>
+	          	</form>
 	        </div>
 	      </li>
 	      <li class="nav-item dropdown">
@@ -45,6 +61,10 @@
 	         	<div class="dropdown-divider"></div>
 	          	<form id="id_form_lista_cupom" action="#" th:action="@{/listaCupons}" method="get">
 	       			<a th:class="dropdown-item" th:href="@{/listaCupons/1}">Cupons</a>
+	          	</form>
+	        	<div class="dropdown-divider"></div>
+	          	<form id="id_form_lista_usuario" action="#" th:action="@{/listaUsuarios}" method="get">
+	       			<a th:class="dropdown-item" th:href="@{/listaUsuarios/1}">Usuários</a>
 	          	</form>
 	        	<div class="dropdown-divider"></div>
 	          	<form id="id_form_lista_pedido" action="#" th:action="@{/listaPedidos}" method="get">
